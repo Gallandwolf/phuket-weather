@@ -3,7 +3,7 @@
   "hazard_type": null,
   "severity": null,
   "expected_timing": null,
-  "precautions": null,
+  "precautions": [],
   "source_links": [],
-  "fingerprint": "no_active_warnings"
+  "fingerprint": "no_active_severe_weather_warnings"
 }
