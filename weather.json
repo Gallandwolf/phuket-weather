@@ -3,7 +3,13 @@
   "hazard_type": null,
   "severity": null,
   "expected_timing": null,
-  "precautions": [],
+  "precautions": null,
   "source_links": [],
-  "fingerprint": "no_active_severe_weather_warnings"
+  "fingerprint": "phuket-phi-phi-weather-current",
+  "phuket": {
+    "temperature": 25.7,
+    "rain": 0.4,
+    "wind": 9.0
+  },
+  "summary": "Phuketin ja Phi Phin alueella on tällä hetkellä ajantasaisten mittaustietojen mukaan rauhallinen säätilanne ilman voimassa olevia säävaroituksia. Lämpötila on 25.7 astetta, sademäärä 0.4 mm ja tuulen nopeus 9 km/h."
 }
