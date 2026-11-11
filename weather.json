@@ -12,12 +12,5 @@
     "wind": 11.9,
     "severity": null
   },
-  "summary": "Ajankohtaisia virallisia voimassa olevia säävaroituksia alueelle ei ole saatavilla (käytettävissä olevat säätiedotteet ovat vanhentuneita vuodelta 2022). Phuketin tämänhetkiset mittausarvot osoittavat heikkoa sadetta (0.1 mm) ja kohtuullista tuulta (11.9 km/h). Koska ajantasaisia varoitustietoja ei ole riittävästi kattavaan riskinarviointiin, riskitasoja ei voida luotettavasti määrittää.",
-  "hazards": {
-    "thunder": null,
-    "rain": "low",
-    "flood": null,
-    "landslide": null,
-    "sea": null
-  }
+  "summary": "Phuketissa on tällä hetkellä heikkoa vähäistä sadetta (sademäärä 0,1 mm), lämpötila on 26,5 °C ja tuulen nopeus 11,9 km/h. Ajantasaisia voimassa olevia säävaroituksia ei ole annetuissa tiedoissa, eikä annetuista tiedoista voida suoraan päätellä tarkkaa riskitasoa meriolosuhteiden tai muiden vaarojen osalta."
 }
