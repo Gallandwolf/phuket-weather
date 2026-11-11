@@ -1,16 +1,16 @@
 {
   "location": "Phuket ja Phi Phi",
   "hazard_type": null,
-  "severity": "normal",
+  "severity": null,
   "expected_timing": null,
   "precautions": null,
   "source_links": [],
   "fingerprint": "phuket-weather-no-active-alert",
   "phuket": {
-    "temperature": 26.8,
-    "rain": 0,
-    "wind": 10.3,
-    "severity": "normal"
+    "temperature": 26.7,
+    "rain": 0.0,
+    "wind": 11.2,
+    "severity": null
   },
-  "summary": "Phuketissä on tällä hetkellä poutaista (sademäärä 0), lämpötila on 26.8 astetta ja tuulen nopeus on 10.3 km/h. Ajantasaisia voimassa olevia säätiedotteen varoituksia alueelle ei ole."
+  "summary": "Ajantasaisia voimassa olevia säätiedotteita tai varoituksia Phuketille ja Phi Pfille ei ole saatavilla. Saatavilla olevien mittaustietojen mukaan Phuketin lämpötila on 26.7 astetta, sademäärä 0 mm ja tuulen nopeus 11.2 km/h."
 }
