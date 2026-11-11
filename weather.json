@@ -8,9 +8,9 @@
   "fingerprint": "phuket-weather-no-active-alert",
   "phuket": {
     "temperature": 25.6,
-    "rain": 0.2,
-    "wind": 5.7,
+    "rain": 0.1,
+    "wind": 6.0,
     "severity": null
   },
-  "summary": "Ajankohtaisia voimassa olevia säävaroituksia ei ole saatavilla (kaikki annetut RSS-tiedotteet ovat vuodelta 2022 tai vanhoja kausitiedotteita). Phuketin tämänhetkiset mittausarvot: lämpötila 25.6 °C, sademäärä 0.2 mm ja tuulen nopeus 5.7 km/h."
+  "summary": "Ajantasaista ja voimassa olevaa virallista säävaroitusta ei ole saatavilla. Paikalliset säätiedot osoittavat kevyttä sadetta ja heikkoa tuulta, mutta annetut tiedot eivät riitä kattavaan riskitason arviointiin."
 }
