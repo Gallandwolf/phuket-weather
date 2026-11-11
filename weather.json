@@ -7,10 +7,10 @@
   "source_links": [],
   "fingerprint": "phuket-weather-no-active-alert",
   "phuket": {
-    "temperature": 26.2,
+    "temperature": 26.1,
     "rain": 0.0,
-    "wind": 13.9,
+    "wind": 14.2,
     "severity": null
   },
-  "summary": "Ajantasaista ja voimassa olevaa virallista säätiedotetta tai varoitusta ei ole saatavilla. Tarjolla olevat säätiedot ilmoittavat lämpötilaksi 26.2 astetta, sademääräksi 0 ja tuulen nopeudeksi 13.9 km/h. Koska tiedot eivät riitä kattavaan riskitason arviointiin eikä voimassa olevia varoituksia ole, riskiarviota ei voida määrittää."
+  "summary": "Phuketissa on tällä hetkellä pilvistä (sääkoodi 3), lämpötila on 26.1 °C, sademäärä on 0 mm ja tuulen nopeus 14.2 km/h. Ajantasaisia voimassa olevia säävaroituksia ei ole saatavilla, sillä annetut RSS-tiedotteet ovat vanhentuneita vuodelta 2022 ja 2025."
 }
