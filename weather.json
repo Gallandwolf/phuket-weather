@@ -9,8 +9,8 @@
   "phuket": {
     "temperature": 25.9,
     "rain": 0,
-    "wind": 8.2,
+    "wind": 6.8,
     "severity": "normal"
   },
-  "summary": "Phuketin tämänhetkiset säätiedot osoittavat rauhallista säätä (lämpötila 25.9 °C, sademäärä 0, tuulen nopeus 8.2 km/h). Ajankohtaisia voimassa olevia virallisia säävaroituksia ei ole saatavilla, sillä annetut varoitustiedot ovat vanhentuneita."
+  "summary": "Phuketin nykyinen säätila on rauhallinen ilman voimassa olevia säävaroituksia. Lämpötila on 25.9 astetta, sademäärä 0 mm ja tuulen nopeus 6.8 km/h. Ajantasaisia virallisia varoituksia ei ole tällä hetkellä voimassa."
 }
