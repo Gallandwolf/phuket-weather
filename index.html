@@ -1,14 +1,611 @@
-<!doctype html><html lang="fi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Phuket & Phi Phi | Tilannekuva</title><style>
-:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#09121f;color:#edf4ff}*{box-sizing:border-box}body{margin:0}.wrap{max-width:820px;margin:auto;padding:18px 14px 40px}header{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px}h1{font-size:clamp(21px,4vw,29px);margin:0}.small{color:#aebed1;font-size:12px}.time{font-size:12px;color:#c5d3e5;text-align:right}.hero{--accent:#8393a9;background:#253346;border:2px solid var(--accent);border-radius:20px;padding:25px 22px;transition:background .35s,border-color .35s;box-shadow:0 10px 32px #0002}.hero[data-level="1"]{--accent:#4ce0a3;background:#104537}.hero[data-level="2"]{--accent:#b4e76b;background:#3c4b20}.hero[data-level="3"]{--accent:#ffd45c;background:#554115}.hero[data-level="4"]{--accent:#ff9555;background:#612e1b}.hero[data-level="5"]{--accent:#ff5265;background:#651c2c}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.1em;opacity:.88}.statusrow{display:flex;align-items:center;gap:14px;margin:9px 0}.symbol{font-size:clamp(37px,7vw,55px)}h2{font-size:clamp(30px,6vw,48px);line-height:1.1;margin:0;letter-spacing:-.035em}.situation{font-size:clamp(16px,3vw,21px);font-weight:650;margin:14px 0 6px}.detail{font-size:14px;line-height:1.45;color:#e5edf7;margin:0}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.chip{border:1px solid #ffffff50;border-radius:99px;padding:6px 10px;font-size:12px;background:#ffffff12}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}.card{background:#16253a;border:1px solid #334760;border-radius:14px;padding:15px}.card h3{font-size:17px;margin:0 0 7px}.card p{margin:0;color:#c3d2e4;font-size:13px;line-height:1.4}.card strong{font-size:16px}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.sectiontitle{font-size:14px;margin:19px 0 9px}.risklist{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.risk{background:#16253a;border:1px solid #334760;border-radius:11px;padding:10px 5px;text-align:center}.risk b{display:block;font-size:19px;margin-bottom:4px}.risk span{display:block;font-size:11px}.risk em{display:block;font-size:11px;font-style:normal;color:#aebed1;margin-top:5px}.risk[data-level="1"]{border-bottom:4px solid #4ce0a3}.risk[data-level="2"]{border-bottom:4px solid #b4e76b}.risk[data-level="3"]{border-bottom:4px solid #ffd45c}.risk[data-level="4"]{border-bottom:4px solid #ff9555}.risk[data-level="5"]{border-bottom:4px solid #ff5265}.risk[data-level="0"]{border-bottom:4px solid #8393a9}.action{margin-top:12px;background:#16253a;border:1px solid #334760;border-radius:14px;padding:15px}.action h3{font-size:14px;margin:0 0 6px}.action p{font-size:14px;line-height:1.5;margin:0}.controls{margin-top:17px;background:#121f31;border:1px solid #334760;border-radius:14px;padding:14px}summary{cursor:pointer;font-weight:700;font-size:14px}label{display:block;font-size:12px;margin:13px 0 5px;color:#bdcde1}textarea,input,select{background:#0a1625;color:#f0f5fb;border:1px solid #49617b;border-radius:8px;padding:10px;width:100%;font:inherit}textarea{min-height:120px;font-size:12px}button{background:#6ad6dc;border:0;border-radius:8px;padding:10px 14px;font-weight:800;cursor:pointer;color:#07202c;margin-top:9px}.secondary{background:#30435a;color:#edf4ff}.controls .inline{display:flex;gap:9px;flex-wrap:wrap}.controls .inline button{flex:1}.msg{font-size:12px;color:#c4d5e7;margin-top:8px}.error{color:#ffacb5}.footer{font-size:11px;line-height:1.5;color:#9fb2c8;margin-top:16px}@media(max-width:520px){.risklist{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:1fr}.hero{padding:20px 16px}.wrap{padding:13px 10px 32px}}
-</style></head><body><main class="wrap"><header><div><h1>🌦 Phuket & Phi Phi</h1><div class="small">Sää- ja turvallisuustilanne</div></div><div class="time" id="updated">Ei ajantasaista päivitystä</div></header>
-<section class="hero" id="hero" data-level="0" aria-live="polite"><div class="eyebrow">TÄMÄNHETKINEN TILANNE</div><div class="statusrow"><span class="symbol" id="symbol">◌</span><h2 id="status">Tieto puuttuu</h2></div><div class="situation" id="situation">Ei vahvistettua ajantasaista sääarviota</div><p class="detail" id="detail">Odottamassa Make.comin sääagentin tietoja. Harmaa ei tarkoita turvallista säätä.</p><div class="chips"><span class="chip" id="region">📍 Phuket + Phi Phi</span><span class="chip" id="source">Tietolähde: ei yhteyttä</span></div></section>
-<div class="grid"><section class="card"><div class="row"><h3>📍 Phuket</h3><strong id="phuketLevel">Ei tietoa</strong></div><p id="phuketWeather">Lämpötila — · Sade — · Tuuli —</p></section><section class="card"><div class="row"><h3>🏝 Phi Phi</h3><strong id="phiLevel">Ei tietoa</strong></div><p id="phiWeather">Lämpötila — · Aallot — · Tuuli —</p></section></div>
-<h3 class="sectiontitle">Vaaratekijät</h3><div class="risklist"><div class="risk" id="thunder" data-level="0"><b>⚡</b><span>Ukkonen</span><em>Ei tietoa</em></div><div class="risk" id="rain" data-level="0"><b>🌧</b><span>Rankkasade</span><em>Ei tietoa</em></div><div class="risk" id="flood" data-level="0"><b>🌊</b><span>Tulva</span><em>Ei tietoa</em></div><div class="risk" id="landslide" data-level="0"><b>⛰</b><span>Maanvyörymä</span><em>Ei tietoa</em></div><div class="risk" id="sea" data-level="0"><b>⛵</b><span>Meri</span><em>Ei tietoa</em></div></div>
-<section class="action"><h3>🛡 Toimintaohje</h3><p id="advice">Tarkista viranomaisten sää- ja merivaroitukset ennen ulkoilua tai venematkaa.</p></section>
-<details class="controls"><summary>⚙ Tietojen päivitys ja testaus</summary><p class="msg">Väri vaihtuu automaattisesti, kun sivulle tuodaan uusi arvio. Live-päivitys vaatii julkisen JSON-osoitteen Make.comin tai muun palvelun kautta.</p><label for="feed">JSON-osoite (valinnainen, automaattinen tarkistus 5 min välein)</label><input id="feed" type="url" value="https://raw.githubusercontent.com/Gallandwolf/phuket-weather/main/weather.json" readonly><div class="inline"><button id="connect">Yhdistä ja tarkista</button><button id="refresh" class="secondary">Päivitä nyt</button></div><label for="json">Tai liitä Geminin JSON-vastaus</label><textarea id="json" placeholder='{"location":"Phuket ja Phi Phi","hazard_type":null,"severity":null,"precautions":null,"source_links":[],"fingerprint":"no_active_warnings"}'></textarea><button id="apply">Näytä arvio</button><label for="demo">Kokeile värin vaihtumista (vain demo)</label><select id="demo"><option value="">Valitse demotilanne</option><option value="1">1 · Vihreä – normaali</option><option value="2">2 · Lime – seuranta</option><option value="3">3 · Keltainen – varoitus</option><option value="4">4 · Oranssi – vakava</option><option value="5">5 · Punainen – välitön vaara</option><option value="0">Harmaa – ei tietoa</option></select><div class="msg" id="message"></div></details><div class="footer">Viisi varoitusväriä näkyy yksi kerrallaan yläosassa. Harmaa = tiedot puuttuvat. Tämä sivu ei ole virallinen varoituspalvelu. Live-yhteys hakee GitHubin weather.json-tiedoston automaattisesti 5 minuutin välein. Harmaa tarkoittaa, ettei analyysi vahvista riskitasoa.</div></main>
+
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phuket & Phi Phi – Säätilanne</title>
+
+<style>
+:root {
+  font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+  color: #edf4ff;
+  background: #09121f;
+}
+
+* { box-sizing: border-box; }
+
+body { margin: 0; }
+
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px 15px 45px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: clamp(26px, 5vw, 42px);
+  margin: 0;
+}
+
+.subtitle, .updated {
+  color: #b8c8dc;
+  font-size: 14px;
+}
+
+.updated { text-align: right; }
+
+.hero {
+  background: #253346;
+  border: 3px solid #8393a9;
+  border-radius: 25px;
+  padding: 30px;
+}
+
+.hero[data-level="1"] {
+  background: #104537;
+  border-color: #4ce0a3;
+}
+
+.hero[data-level="2"] {
+  background: #3c4b20;
+  border-color: #b4e76b;
+}
+
+.hero[data-level="3"] {
+  background: #554115;
+  border-color: #ffd45c;
+}
+
+.hero[data-level="4"] {
+  background: #612e1b;
+  border-color: #ff9555;
+}
+
+.hero[data-level="5"] {
+  background: #651c2c;
+  border-color: #ff5265;
+}
+
+.eyebrow {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 22px 0;
+}
+
+.symbol {
+  font-size: 55px;
+}
+
+.status h2 {
+  font-size: clamp(35px, 7vw, 60px);
+  margin: 0;
+}
+
+.situation {
+  font-size: 21px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.detail {
+  font-size: 16px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.chip {
+  border: 1px solid #ffffff55;
+  border-radius: 30px;
+  padding: 9px 15px;
+  background: #ffffff10;
+  font-size: 13px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.card, .action, .controls {
+  background: #16253a;
+  border: 1px solid #334760;
+  border-radius: 20px;
+  padding: 22px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 23px;
+}
+
+.card strong {
+  text-align: right;
+}
+
+.card p {
+  color: #c3d2e4;
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+.section-title {
+  margin: 28px 0 15px;
+  font-size: 22px;
+}
+
+.risks {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.risk {
+  background: #16253a;
+  border: 1px solid #334760;
+  border-bottom: 5px solid #8393a9;
+  border-radius: 15px;
+  padding: 18px 8px;
+  text-align: center;
+}
+
+.risk[data-level="1"] { border-bottom-color: #4ce0a3; }
+.risk[data-level="2"] { border-bottom-color: #b4e76b; }
+.risk[data-level="3"] { border-bottom-color: #ffd45c; }
+.risk[data-level="4"] { border-bottom-color: #ff9555; }
+.risk[data-level="5"] { border-bottom-color: #ff5265; }
+
+.risk .emoji {
+  font-size: 27px;
+}
+
+.risk .name {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.risk .level {
+  color: #b8c8dc;
+  margin-top: 9px;
+  font-size: 13px;
+}
+
+.action, .controls {
+  margin-top: 20px;
+}
+
+.action h3 {
+  margin-top: 0;
+}
+
+.action p {
+  line-height: 1.6;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button {
+  background: #6ad6dc;
+  color: #07202c;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+button:hover {
+  filter: brightness(1.1);
+}
+
+.message {
+  color: #b8c8dc;
+  font-size: 13px;
+}
+
+.footer {
+  margin-top: 25px;
+  color: #9fb2c8;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media (max-width: 650px) {
+  .grid { grid-template-columns: 1fr; }
+  .risks { grid-template-columns: repeat(3, 1fr); }
+  .hero { padding: 22px 18px; }
+  .status .symbol { font-size: 40px; }
+  .card { padding: 17px; }
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<header>
+  <div>
+    <h1>🌦 Phuket & Phi Phi</h1>
+    <div class="subtitle">Sää- ja turvallisuustilanne</div>
+  </div>
+  <div class="updated" id="updated">
+    Odotetaan tietoja
+  </div>
+</header>
+
+<section class="hero" id="hero" data-level="0">
+  <div class="eyebrow">TÄMÄNHETKINEN TILANNE</div>
+
+  <div class="status">
+    <span class="symbol" id="symbol">◌</span>
+    <h2 id="status">Tieto puuttuu</h2>
+  </div>
+
+  <div class="situation" id="situation">
+    Riskitasoa ei ole vahvistettu
+  </div>
+
+  <div class="detail" id="detail">
+    Odotetaan sääagentin tietoja.
+  </div>
+
+  <div class="chips">
+    <span class="chip" id="region">📍 Phuket & Phi Phi</span>
+    <span class="chip" id="source">Tietolähde: odotetaan</span>
+  </div>
+</section>
+
+<div class="grid">
+
+  <section class="card">
+    <div class="card-header">
+      <h3>📍 Phuket</h3>
+      <strong id="phuketLevel">Tieto puuttuu</strong>
+    </div>
+    <p id="phuketWeather">
+      Lämpötila — · Sade — · Tuuli —
+    </p>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
+      <h3>🏝 Phi Phi</h3>
+      <strong id="phiLevel">Ei erillistä arviota</strong>
+    </div>
+    <p id="phiWeather">
+      Lämpötila — · Aallot — · Tuuli —
+    </p>
+  </section>
+
+</div>
+
+<h3 class="section-title">Vaaratekijät</h3>
+
+<div class="risks">
+
+  <div class="risk" id="thunder" data-level="0">
+    <div class="emoji">⚡</div>
+    <div class="name">Ukkonen</div>
+    <div class="level">Ei tietoa</div>
+  </div>
+
+  <div class="risk" id="rain" data-level="0">
+    <div class="emoji">🌧</div>
+    <div class="name">Rankkasade</div>
+    <div class="level">Ei tietoa</div>
+  </div>
+
+  <div class="risk" id="flood" data-level="0">
+    <div class="emoji">🌊</div>
+    <div class="name">Tulva</div>
+    <div class="level">Ei tietoa</div>
+  </div>
+
+  <div class="risk" id="landslide" data-level="0">
+    <div class="emoji">⛰</div>
+    <div class="name">Maanvyörymä</div>
+    <div class="level">Ei tietoa</div>
+  </div>
+
+  <div class="risk" id="sea" data-level="0">
+    <div class="emoji">⛵</div>
+    <div class="name">Meri</div>
+    <div class="level">Ei tietoa</div>
+  </div>
+
+</div>
+
+<section class="action">
+  <h3>🛡 Toimintaohje</h3>
+  <p id="advice">
+    Tarkista viralliset sää- ja merivaroitukset ennen
+    ulkoilua tai venematkaa.
+  </p>
+</section>
+
+<details class="controls">
+  <summary>⚙ Tietojen päivitys ja testaus</summary>
+
+  <p class="message">
+    Sääsivu hakee GitHubin weather.json-tiedoston
+    automaattisesti viiden minuutin välein.
+  </p>
+
+  <button id="refresh">Päivitä tiedot nyt</button>
+
+  <p class="message" id="message"></p>
+</details>
+
+<div class="footer">
+  Tietolähde: Make.com / Open-Meteo / Gemini.
+  Sivu ei ole virallinen säävaroituspalvelu.
+  Harmaa tarkoittaa, ettei riskitasoa voida vahvistaa.
+  Varoitusten puuttuminen ei tarkoita turvallista säätä.
+</div>
+
+</main>
+
 <script>
-const $=id=>document.getElementById(id);const labels=['Tieto puuttuu','Normaali','Seuranta','Varoitus','Vakava varoitus','Välitön vaara'];const icons=['◌','✓','◔','!','⚠','⛔'];const severity={none:1,normal:1,low:2,minor:2,moderate:3,medium:3,high:4,severe:4,critical:5,extreme:5,emergency:5};function lev(v){if(v===null||v===undefined||v==='')return 0;if(typeof v==='number')return Math.max(0,Math.min(5,Math.round(v)));return severity[String(v).toLowerCase().trim()]||0}function update(l,summary,detail,advice,origin){$('hero').dataset.level=l;$('symbol').textContent=icons[l];$('status').textContent=labels[l];$('situation').textContent=summary;$('detail').textContent=detail;$('advice').textContent=advice;$('source').textContent=origin;$('updated').textContent='Päivitetty näkymään '+new Date().toLocaleTimeString('fi-FI',{hour:'2-digit',minute:'2-digit'});}function hazard(k,l){$(k).dataset.level=l;$(k).querySelector('em').textContent=l?labels[l]:'Ei tietoa'}function clean(s,max=200){return typeof s==='string'?s.slice(0,max):''}function render(d,origin='Gemini · tuotu käsin'){if(!d||typeof d!=='object'||Array.isArray(d))throw Error('JSON-objekti puuttuu');let l=lev(d.severity);let types=(Array.isArray(d.hazard_type)?d.hazard_type:[d.hazard_type]).filter(Boolean);const fp=String(d.fingerprint||'');const noWarnings=false;fp.startsWith('no_active_')||(!types.length&&!l&&d.hazard_type==null);const typeText=types.map(String).join(', ');const description=clean(d.situation||d.summary||d.expected_timing,160);const summary=noWarnings?'Ei aktiivisia vaaravaroituksia vahvistettu':clean(d.situation||d.summary,110)||(l?labels[l]+' · '+(typeText||'säätilanne'):'Riskitaso ei tiedossa');const detail=description||'Arvio perustuu toimitettuun tietoon. Tarkista sen ajantasaisuus ja viralliset lähteet.';const advice=(Array.isArray(d.precautions)?d.precautions.filter(Boolean).join(' · '):clean(d.precautions,320))|| (noWarnings?'Ei erityisiä varotoimia ilmoitettujen tietojen perusteella. Seuraa silti viranomaistiedotteita.':'Tarkista viralliset sää- ja merivaroitukset ennen matkaa.');update(l,summary,detail,advice,origin);$('region').textContent='📍 '+(clean(d.location,45)||'Phuket + Phi Phi');const patterns={thunder:/thunder|lightning|storm|ukkon|salamo/i,rain:/rain|precip|sade/i,flood:/flood|tulv/i,landslide:/landslide|mudslide|vyörym/i,sea:/sea|marine|wave|wind|boat|meri|aalto|vene/i};Object.keys(patterns).forEach(k=>hazard(k,types.some(t=>patterns[k].test(String(t)))?l:0));$('phuketLevel').textContent='Ei erillistä arviota';$('phiLevel').textContent='Ei erillistä arviota';if(d.phuket&&typeof d.phuket==='object')$('phuketLevel').textContent=labels[lev(d.phuket.severity)];if(d.phi_phi&&typeof d.phi_phi==='object')$('phiLevel').textContent=labels[lev(d.phi_phi.severity)];function fmt(v,unit){return v==null?'—':String(v)+' '+unit}if(d.phuket?.temperature!=null||d.phuket?.rain!=null||d.phuket?.wind!=null)$('phuketWeather').textContent=`Lämpötila ${fmt(d.phuket.temperature,'°C')} · Sade ${fmt(d.phuket.rain,'mm')} · Tuuli ${fmt(d.phuket.wind,'km/h')}`;if(d.phi_phi?.temperature!=null||d.phi_phi?.waves!=null||d.phi_phi?.wind!=null)$('phiWeather').textContent=`Lämpötila ${fmt(d.phi_phi.temperature,'°C')} · Aallot ${fmt(d.phi_phi.waves,'m')} · Tuuli ${fmt(d.phi_phi.wind,'km/h')}`;}
-$('apply').onclick=()=>{try{render(JSON.parse($('json').value));$('message').textContent='Arvio päivitetty.'}catch(e){$('message').textContent='Virhe: '+e.message}};
-$('demo').onchange=()=>{if($('demo').value==='')return;let l=Number($('demo').value);update(l,l?'Esimerkkitilanne – '+labels[l]:'Ei vahvistettua ajantasaista tietoa','DEMO: Tämä ei ole oikea säävaroitus.','DEMO: Tarkista aina viralliset tiedotteet.','DEMO · ei todellinen varoitus');Object.keys({thunder:1,rain:1,flood:1,landslide:1,sea:1}).forEach(k=>hazard(k,0));$('message').textContent='Demotaso '+l+' näytössä.'};
-let url="https://raw.githubusercontent.com/Gallandwolf/phuket-weather/main/weather.json";$("feed").value=url;async function refresh(){if(!url){$('message').textContent='Lisää ensin JSON-osoite.';return}try{const res=await fetch(url+'?t='+Date.now(),{cache:'no-store'});if(!res.ok)throw Error('HTTP '+res.status);const d=await res.json();render(d,'JSON-syöte · tarkistettu');$('message').textContent='Tiedot haettu onnistuneesti.'}catch(e){$('message').textContent='Haku epäonnistui: '+e.message+' (selaimen CORS-rajoitus tai osoite voi estää haun).';$('updated').textContent='Tietojen haku epäonnistui'}}$('connect').onclick=()=>{let val=$('feed').value.trim();if(!/^https:\/\//i.test(val)){$('message').textContent='Anna https://-alkuinen JSON-osoite.';return}url=val;refresh()};$('refresh').onclick=refresh;refresh();setInterval(()=>{if(url)refresh()},300000);
-</script></body></html>
+"use strict";
+
+const $ = id => document.getElementById(id);
+
+const DATA_URL =
+  "https://raw.githubusercontent.com/Gallandwolf/phuket-weather/main/weather.json";
+
+const labels = [
+  "Tieto puuttuu",
+  "Normaali",
+  "Seuranta",
+  "Varoitus",
+  "Vakava varoitus",
+  "Välitön vaara"
+];
+
+const icons = ["◌", "✓", "◔", "!", "⚠", "⛔"];
+
+const severityMap = {
+  normal: 1,
+  low: 2,
+  moderate: 3,
+  high: 4,
+  critical: 5
+};
+
+function level(value) {
+  if (value === null || value === undefined || value === "") {
+    return 0;
+  }
+
+  if (typeof value === "number") {
+    return Number.isInteger(value) && value >= 0 && value <= 5
+      ? value
+      : 0;
+  }
+
+  return severityMap[String(value).toLowerCase().trim()] || 0;
+}
+
+function safeText(value, fallback = "") {
+  return typeof value === "string" && value.trim()
+    ? value.trim()
+    : fallback;
+}
+
+function formatNumber(value, unit) {
+  if (value === null || value === undefined || value === "") {
+    return "—";
+  }
+
+  const number = Number(value);
+
+  return Number.isFinite(number)
+    ? number.toLocaleString("fi-FI") + " " + unit
+    : "—";
+}
+
+function setHazard(id, riskLevel) {
+  const element = $(id);
+  element.dataset.level = String(riskLevel);
+  element.querySelector(".level").textContent =
+    riskLevel ? labels[riskLevel] : "Ei tietoa";
+}
+
+function resetHazards() {
+  ["thunder", "rain", "flood", "landslide", "sea"]
+    .forEach(id => setHazard(id, 0));
+}
+
+function render(data) {
+  if (!data || typeof data !== "object" || Array.isArray(data)) {
+    throw new Error("Virheellinen JSON-tiedosto");
+  }
+
+  // Null tarkoittaa tuntematonta riskitasoa.
+  // Varoitusten puuttuminen ei tarkoita normaalia tilannetta.
+
+  const overallLevel = level(data.severity);
+
+  $("hero").dataset.level = String(overallLevel);
+  $("symbol").textContent = icons[overallLevel];
+  $("status").textContent = labels[overallLevel];
+
+  $("situation").textContent = overallLevel === 0
+    ? "Riskitasoa ei voida vahvistaa"
+    : labels[overallLevel] + " – säätilanne";
+
+  $("detail").textContent = safeText(
+    data.summary,
+    "Ajantasaista sääarviota ei ole saatavilla."
+  );
+
+  $("region").textContent = "📍 " +
+    safeText(data.location, "Phuket & Phi Phi");
+
+  $("source").textContent = "JSON-syöte · vastaanotettu";
+
+  const phuket = data.phuket;
+
+  $("phuketLevel").textContent =
+    phuket && typeof phuket === "object"
+      ? labels[level(phuket.severity)]
+      : "Tieto puuttuu";
+
+  if (phuket && typeof phuket === "object") {
+    $("phuketWeather").textContent =
+      "Lämpötila " + formatNumber(phuket.temperature, "°C") +
+      " · Sade " + formatNumber(phuket.rain, "mm") +
+      " · Tuuli " + formatNumber(phuket.wind, "km/h");
+  }
+
+  const phi = data.phi_phi;
+
+  $("phiLevel").textContent =
+    phi && typeof phi === "object"
+      ? labels[level(phi.severity)]
+      : "Ei erillistä arviota";
+
+  if (phi && typeof phi === "object") {
+    $("phiWeather").textContent =
+      "Lämpötila " + formatNumber(phi.temperature, "°C") +
+      " · Aallot " + formatNumber(phi.waves, "m") +
+      " · Tuuli " + formatNumber(phi.wind, "km/h");
+  }
+
+  // Vaaratekijät pysyvät tuntemattomina,
+  // ellei JSON sisällä niiden erillisiä riskitasoja.
+
+  resetHazards();
+
+  const hazards = data.hazards;
+
+  if (hazards && typeof hazards === "object" &&
+      !Array.isArray(hazards)) {
+    ["thunder", "rain", "flood", "landslide", "sea"]
+      .forEach(id => {
+        const item = hazards[id];
+        const value = item && typeof item === "object"
+          ? item.severity
+          : item;
+
+        setHazard(id, level(value));
+      });
+  }
+
+  const precautions = data.precautions;
+
+  if (Array.isArray(precautions) && precautions.length) {
+    $("advice").textContent =
+      precautions.filter(Boolean).join(" · ");
+  } else if (typeof precautions === "string" &&
+             precautions.trim()) {
+    $("advice").textContent = precautions;
+  } else {
+    $("advice").textContent =
+      "Tarkista viralliset sää- ja merivaroitukset " +
+      "ennen ulkoilua tai venematkaa.";
+  }
+
+  $("updated").textContent =
+    "Sivu tarkistettu " +
+    new Date().toLocaleTimeString("fi-FI", {
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+}
+
+async function refresh() {
+  $("message").textContent = "Haetaan säätietoja...";
+
+  try {
+    const response = await fetch(
+      DATA_URL + "?t=" + Date.now(),
+      { cache: "no-store" }
+    );
+
+    if (!response.ok) {
+      throw new Error("HTTP " + response.status);
+    }
+
+    const data = await response.json();
+
+    render(data);
+
+    $("message").textContent =
+      "Säätiedot haettu onnistuneesti.";
+
+  } catch (error) {
+    $("hero").dataset.level = "0";
+    $("symbol").textContent = icons[0];
+    $("status").textContent = labels[0];
+
+    $("situation").textContent =
+      "Säätietojen haku epäonnistui";
+
+    $("detail").textContent =
+      "Viimeisimpien tietojen ajantasaisuutta ei voida vahvistaa.";
+
+    $("source").textContent = "Tietolähde ei vastaa";
+    $("updated").textContent = "Päivitys epäonnistui";
+    $("phuketLevel").textContent = "Tieto puuttuu";
+    $("phiLevel").textContent = "Tieto puuttuu";
+    $("phuketWeather").textContent =
+      "Lämpötila — · Sade — · Tuuli —";
+    $("phiWeather").textContent =
+      "Lämpötila — · Aallot — · Tuuli —";
+
+    resetHazards();
+
+    $("message").textContent =
+      "Virhe: " + error.message;
+  }
+}
+
+$("refresh").addEventListener("click", refresh);
+
+refresh();
+
+// Sivu tarkistaa GitHubin tiedot 5 minuutin välein.
+// Make.comin oma ajastus toimii erikseen.
+
+setInterval(refresh, 5 * 60 * 1000);
+</script>
+
+</body>
+</html>
