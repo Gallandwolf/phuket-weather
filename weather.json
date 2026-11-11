@@ -1,5 +1,5 @@
 {
-  "location": "Phuket ja Phi Phi",
+  "location": "Phuket / Phi Phi",
   "hazard_type": null,
   "severity": "normal",
   "expected_timing": null,
@@ -9,8 +9,8 @@
   "phuket": {
     "temperature": 26.6,
     "rain": 0,
-    "wind": 11.4,
+    "wind": 12.1,
     "severity": "normal"
   },
-  "summary": "Phuketissa on tällä hetkellä poutaista (sademäärä 0), lämpötila on 26,6 °C ja tuulen nopeus 11,4 km/h. Ajankohtaisia voimassa olevia säätiedotuksen vaaratiedotteita alueelle ei ole."
+  "summary": "Phuketissa on tällä hetkellä poutaista (sademäärä 0), lämpötila on 26,6 °C ja tuulen nopeus 12,1 km/h. Ajantasaisia virallisia säätiedotteita tai varoituksia ei ole voimassa, eikä merkittäviä sääriskejä ole tällä hetkellä tiedossa."
 }
