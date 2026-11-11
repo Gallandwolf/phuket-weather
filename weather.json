@@ -7,10 +7,10 @@
   "source_links": [],
   "fingerprint": "phuket-weather-no-active-alert",
   "phuket": {
-    "temperature": 26.5,
+    "temperature": 26.3,
     "rain": 0.1,
-    "wind": 11.9,
+    "wind": 12.0,
     "severity": null
   },
-  "summary": "Phuketissa on tällä hetkellä heikkoa vähäistä sadetta (sademäärä 0,1 mm), lämpötila on 26,5 °C ja tuulen nopeus 11,9 km/h. Ajantasaisia voimassa olevia säävaroituksia ei ole annetuissa tiedoissa, eikä annetuista tiedoista voida suoraan päätellä tarkkaa riskitasoa meriolosuhteiden tai muiden vaarojen osalta."
+  "summary": "Phuketin nykyiset säätiedot osoittavat kevyttä sadetta (0.1 mm), lämpötila on 26.3 °C ja tuulen nopeus 12 km/h. Ajantasaisia voimassa olevia virallisia säävaroituksia ei ole annetuissa tiedoissa, sillä tarjolla olevat varoitustiedot ovat vanhentuneita vuodelta 2022 tai koskevat tulevaa Songkran-ajankohtaa vuonna 2025. Säähavaintojen perusteella ei voi suoraan määrittää kokonaisriskitasoa, joten vakavuusarvio on toistaiseksi määrittelemätön."
 }
