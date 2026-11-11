@@ -9,8 +9,8 @@
   "phuket": {
     "temperature": 26.7,
     "rain": 0,
-    "wind": 11.2,
+    "wind": 11.3,
     "severity": null
   },
-  "summary": "Ajantasaisia ja voimassa olevia säävaroituksia Phuketin ja Phi Phin alueelle ei ole saatavilla. Saatavilla olevien mittaustietojen mukaan Phuketin lämpötila on 26.7 astetta, sademäärä on 0 ja tuulen nopeus 11.2 km/h. Tiedot eivät riitä kattavaan riskitason arviointiin."
+  "summary": "Phuketin nykyiset säätiedot osoittavat lämpötilan olevan 26.7 °C, sademäärän 0 mm ja tuulen nopeuden 11.3 km/h. Ajantasaisia voimassa olevia säätiedotuksia tai varoituksia ei ole saatavilla, sillä annetut RSS-tiedotteet ovat vanhentuneita vuodelta 2022 tai koskevat tulevaisuutta/muita alueita."
 }
