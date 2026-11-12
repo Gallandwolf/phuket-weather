@@ -1,7 +1,7 @@
-
 import os
 import json
 import re
+import time
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 
@@ -9,14 +9,13 @@ import requests
 
 API_KEY = os.environ.get("GEMINI_API_KEY")
 TIMEOUT = 30
-
 LOCATIONS = {
     "phuket": {"latitude": 7.82, "longitude": 98.30},
     "phi_phi": {"latitude": 7.74, "longitude": 98.77},
 }
-
 LEVELS = ["normal", "low", "moderate", "high", "critical"]
 HAZARDS = ["thunder", "rain", "flood", "landslide", "sea"]
+DMR_URL = "https://landslidemonitoring.dmr.go.th/Home/Index"
 
 
 class TextExtractor(HTMLParser):
@@ -54,14 +53,8 @@ def fetch_weather(coords):
         "https://api.open-meteo.com/v1/forecast",
         {
             **coords,
-            "current": (
-                "temperature_2m,precipitation,"
-                "wind_speed_10m,weather_code"
-            ),
-            "hourly": (
-                "precipitation,precipitation_probability,"
-                "wind_gusts_10m,weather_code"
-            ),
+            "current": "temperature_2m,precipitation,wind_speed_10m,weather_code",
+            "hourly": "precipitation,precipitation_probability,wind_gusts_10m,weather_code",
             "forecast_days": 2,
             "timezone": "Asia/Bangkok",
         },
@@ -73,89 +66,76 @@ def fetch_marine(coords):
         "https://marine-api.open-meteo.com/v1/marine",
         {
             **coords,
-            "hourly": (
-                "wave_height,wave_period,"
-                "swell_wave_height"
-            ),
+            "hourly": "wave_height,wave_period,swell_wave_height",
             "forecast_days": 2,
             "timezone": "Asia/Bangkok",
         },
     )
 
 
-def fetch_tmd():
-    url = "https://phuketmet.tmd.go.th/th"
+def fetch_page_text(url):
     response = requests.get(
         url,
         timeout=TIMEOUT,
         headers={"User-Agent": "Mozilla/5.0"},
     )
     response.raise_for_status()
-
     parser = TextExtractor()
     parser.feed(response.text)
-
-    text = re.sub(r"\s+", " ", " ".join(parser.parts))
-    return text[:5000]
+    return re.sub(r"\s+", " ", " ".join(parser.parts)).strip()[:5000]
 
 
 def get_sources_and_data():
     data = {}
     sources = []
-    now = datetime.now(timezone.utc).isoformat()
+
+    def add_source(name, url, success, note=""):
+        source = {
+            "name": name,
+            "url": url,
+            "status": "success" if success else "unavailable",
+            "retrieved_at": datetime.now(timezone.utc).isoformat(),
+            "used_in_analysis": success,
+        }
+        if note:
+            source["note"] = note
+        sources.append(source)
 
     for name, coords in LOCATIONS.items():
         for kind, fetcher, url in [
-            (
-                "weather",
-                fetch_weather,
-                "https://open-meteo.com/en/docs",
-            ),
-            (
-                "marine",
-                fetch_marine,
-                "https://open-meteo.com/en/docs/marine-weather-api",
-            ),
+            ("weather", fetch_weather, "https://open-meteo.com/en/docs"),
+            ("marine", fetch_marine, "https://open-meteo.com/en/docs/marine-weather-api"),
         ]:
             key = f"{name}_{kind}"
             try:
                 data[key] = fetcher(coords)
-                sources.append({
-                    "name": f"Open-Meteo {kind} – {name}",
-                    "url": url,
-                    "status": "success",
-                    "retrieved_at": now,
-                    "used_in_analysis": True,
-                })
+                add_source(f"Open-Meteo {kind} – {name}", url, True)
             except Exception as exc:
                 print(f"Source unavailable: {key}: {exc}")
-                sources.append({
-                    "name": f"Open-Meteo {kind} – {name}",
-                    "url": url,
-                    "status": "unavailable",
-                    "retrieved_at": now,
-                    "used_in_analysis": False,
-                })
+                add_source(f"Open-Meteo {kind} – {name}", url, False)
 
+    tmd_url = "https://phuketmet.tmd.go.th/th"
     try:
-        data["tmd_context"] = fetch_tmd()
-        sources.append({
-            "name": "TMD Phuket – verkkosivun teksti",
-            "url": "https://phuketmet.tmd.go.th/th",
-            "status": "success",
-            "retrieved_at": now,
-            "used_in_analysis": True,
-            "note": "Julkaisuaikaa ei varmistettu",
-        })
+        text = fetch_page_text(tmd_url)
+        if not text:
+            raise ValueError("Sivulta ei saatu tekstiä")
+        data["tmd_context"] = text
+        add_source("TMD Phuket – verkkosivun teksti", tmd_url, True,
+                   "Julkaisuaikaa ja varoitusten ajantasaisuutta ei varmistettu")
     except Exception as exc:
         print(f"TMD unavailable: {exc}")
-        sources.append({
-            "name": "TMD Phuket",
-            "url": "https://phuketmet.tmd.go.th/th",
-            "status": "unavailable",
-            "retrieved_at": now,
-            "used_in_analysis": False,
-        })
+        add_source("TMD Phuket", tmd_url, False)
+
+    try:
+        text = fetch_page_text(DMR_URL)
+        if len(text) < 100:
+            raise ValueError("DMR-sivulta ei saatu riittävästi tekstiä")
+        data["dmr_landslide_context"] = text
+        add_source("DMR – maanvyörymäseurannan verkkosivun teksti", DMR_URL, True,
+                   "Sivun teksti haettu; ajantasaisia mittauksia tai varoituksia ei ole vahvistettu")
+    except Exception as exc:
+        print(f"DMR unavailable: {exc}")
+        add_source("DMR – maanvyörymäseuranta", DMR_URL, False)
 
     if "phuket_weather" not in data:
         raise RuntimeError("Phuketin säätietoja ei saatu")
@@ -168,34 +148,31 @@ def analyze(data):
         raise RuntimeError("GEMINI_API_KEY puuttuu")
 
     prompt = """
-Olet Phuketin ja Phi Phin henkilökohtainen
-sää- ja turvallisuusriskien analysoija.
-
-Arvioi viisi vaaratekijää:
-thunder, rain, flood, landslide, sea.
-
-Käytä vain annettuja lähdetietoja.
+Olet Phuketin ja Phi Phin henkilökohtainen sää- ja turvallisuusriskien analysoija.
+Arvioi viisi vaaratekijää: thunder, rain, flood, landslide, sea.
+Käytä vain annettuja lähdetietoja. Älä keksi havaintoja, varoituksia tai uutisia.
 
 Tärkeät säännöt:
-- Älä keksi havaintoja, varoituksia tai uutisia.
 - Open-Meteon sääennuste ei ole virallinen varoitus.
-- TMD:n verkkosivutekstin ajantasaisuutta ei ole
-  varmistettu. Älä käytä sitä nykyisen varoituksen
-  todisteena ilman selvää päivämäärää.
-- Jos riskille ei ole riittävästi tietoa, käytä null.
-- Arvioi ukkosriskiä myös weather_code-arvoista.
-  Koodi 95, 96 tai 99 tarkoittaa ukkosennustetta.
-- Arvioi sadetta myös ennustetuista sademääristä.
+- TMD:n ja DMR:n verkkosivutekstin julkaisuajankohtaa tai ajantasaisuutta
+  ei ole vahvistettu. Älä pidä sivun yleistä tekstiä voimassa olevana varoituksena.
+- DMR:n sivu voi ladata varsinaiset mittaukset ja varoitukset JavaScriptillä.
+  Pelkkä haettu HTML-teksti ei todista, että ajantasaiset varoitukset on luettu.
+- DMR:n sivun onnistunut lataus ei todista maanvyörymäriskin olevan normaali.
+- Jos maanvyörymän tai tulvan riskitasolle ei ole riittävästi ajantasaista,
+  paikallista näyttöä, käytä kyseisen riskin arvona null, ei normal.
+- Jos DMR-tekstissä näkyy varoitus, arvioi sen merkitys vain, jos
+  ajankohta ja alue (Phuket / Phi Phi) käyvät yksiselitteisesti ilmi.
+- Älä päättele maanvyörymäriskiä normaaliksi vain siksi, ettei
+  haetussa tekstissä näy varoitusta.
+- Arvioi ukkosriskiä myös weather_code-arvoista: 95, 96, 99 tarkoittavat ukkosta.
+- Arvioi sadetta ennustetuista sademääristä.
 - Arvioi meririskiä aallonkorkeudesta ja tuulesta.
-- Älä päättele tulvaa tai maanvyörymää pelkästä
-  yksittäisestä sadehavainnosta.
-- Kerro suomeksi selkeästi analyysin perusteet.
+- Älä päättele tulvaa tai maanvyörymää pelkästä yksittäisestä sadehavainnosta.
+- Kerro suomeksi selkeästi analyysin perusteet ja puuttuvan tiedon rajoitukset.
 
-Riskitasot:
-normal, low, moderate, high, critical tai null.
-
+Riskitasot: normal, low, moderate, high, critical tai null.
 Palauta vain JSON-objekti tässä muodossa:
-
 {
   "severity": null,
   "summary": "Yhteenveto suomeksi",
@@ -210,12 +187,12 @@ Palauta vain JSON-objekti tässä muodossa:
     "thunder": "Perustelu",
     "rain": "Perustelu",
     "flood": "Perustelu",
-    "landslide": "Perustelu",
+    "landslide": "Perustelu ja DMR-tietojen rajoitukset",
     "sea": "Perustelu"
   }
 }
 
-Säätiedot:
+Lähteistä kerätyt tiedot:
 """ + json.dumps(data, ensure_ascii=False)
 
     url = (
@@ -223,17 +200,13 @@ Säätiedot:
         "v1beta/models/gemini-3.5-flash-lite:generateContent"
     )
 
-    import time
-
     for attempt in range(4):
         try:
             response = requests.post(
                 url,
                 headers={"x-goog-api-key": API_KEY},
                 json={
-                    "contents": [
-                        {"parts": [{"text": prompt}]}
-                    ],
+                    "contents": [{"parts": [{"text": prompt}]}],
                     "generationConfig": {
                         "responseMimeType": "application/json",
                         "temperature": 0.1,
@@ -247,21 +220,16 @@ Säätiedot:
             time.sleep(15 * (2 ** attempt))
             continue
 
-        if response.status_code in (429, 500, 502, 503, 504):
-            if attempt < 3:
-                wait = 15 * (2 ** attempt)
-                print(f"Gemini {response.status_code}, odotetaan {wait}s")
-                time.sleep(wait)
-                continue
-
+        if response.status_code in (429, 500, 502, 503, 504) and attempt < 3:
+            wait = 15 * (2 ** attempt)
+            print(f"Gemini {response.status_code}, odotetaan {wait}s")
+            time.sleep(wait)
+            continue
         break
-
 
     if not response.ok:
         print("Gemini API:", response.status_code, response.text[:1500])
-
     response.raise_for_status()
-
     result = response.json()
     answer = result["candidates"][0]["content"]["parts"][0]["text"]
     return json.loads(answer)
@@ -273,19 +241,25 @@ def main():
 
     raw_hazards = analysis.get("hazards") or {}
     hazards = {
-        key: raw_hazards.get(key)
-        if raw_hazards.get(key) in LEVELS
-        else None
+        key: raw_hazards.get(key) if raw_hazards.get(key) in LEVELS else None
         for key in HAZARDS
     }
+    # HTML-teksti ei yksin riitä osoittamaan maanvyörymä- tai tulvariskiä normaaliksi.
+    for key in ("landslide", "flood"):
+        if hazards[key] == "normal":
+            hazards[key] = None
+            details = analysis.setdefault("hazard_details", {})
+            details[key] = (
+                "Ajantasaista paikallista viranomaistietoa ei ole vahvistettu. "
+                "Riskitaso on tuntematon; tämä ei tarkoita turvallista tilannetta."
+            )
 
     severity = analysis.get("severity")
     if severity not in LEVELS:
         severity = None
 
     phuket = data["phuket_weather"]["current"]
-    phi_data = data.get("phi_phi_weather", {})
-    phi_phi = phi_data.get("current", {})
+    phi_phi = data.get("phi_phi_weather", {}).get("current", {})
 
     output = {
         "location": "Phuket ja Phi Phi",
@@ -294,11 +268,7 @@ def main():
         "severity": severity,
         "expected_timing": None,
         "precautions": None,
-        "source_links": [
-            source["url"]
-            for source in sources
-            if source["used_in_analysis"]
-        ],
+        "source_links": [s["url"] for s in sources if s["used_in_analysis"]],
         "fingerprint": "phuket-weather-hourly",
         "phuket": {
             "temperature": phuket.get("temperature_2m"),
