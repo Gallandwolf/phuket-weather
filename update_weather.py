@@ -272,6 +272,7 @@ def main():
         "fingerprint": "phuket-weather-hourly",
         "phuket": {
             "temperature": phuket.get("temperature_2m"),
+            "weather_code": phuket.get("weather_code"),
             "rain": phuket.get("precipitation"),
             "wind": phuket.get("wind_speed_10m"),
             "severity": severity,
