@@ -1,29 +1,80 @@
 {
   "location": "Phuket ja Phi Phi",
-  "updated_at": "2026-11-12T02:15:53.256089+00:00",
+  "updated_at": "2026-11-12T02:34:03.731663+00:00",
   "hazard_type": null,
   "severity": "moderate",
   "expected_timing": null,
   "precautions": null,
-  "source_links": [],
+  "source_links": [
+    "https://open-meteo.com/en/docs",
+    "https://open-meteo.com/en/docs/marine-weather-api",
+    "https://open-meteo.com/en/docs",
+    "https://open-meteo.com/en/docs/marine-weather-api",
+    "https://phuketmet.tmd.go.th/th"
+  ],
   "fingerprint": "phuket-weather-hourly",
   "phuket": {
-    "temperature": 29.0,
+    "temperature": 29.1,
     "rain": 0.0,
-    "wind": 13.2,
+    "wind": 12.4,
     "severity": "moderate"
   },
   "phi_phi": {
-    "temperature": 27.2,
+    "temperature": 27.4,
     "rain": 0.0,
-    "wind": 13.5
+    "wind": 14.6
   },
-  "summary": "Phuketissä ja Phi Phillä on ennustettu sadetta ja ajoittaisia sadekuuroja sekä kohonnutta sateen todennäköisyyttä tulevina päivinä. Tuulenpuuskat ovat enimmäkseen kohtalaisia (korkeintaan noin 35-39 km/h), eivätkä ukkostiedot sisälly havaintoihin. Tulva-, maanvyörymä- tai meriolosuhdetietoja ei ole riittävästi suoraan määritettäväksi.",
+  "summary": "Phuketin ja Phi Phin sääennusteessa on ennustettu toistuvia sateita ja ajoittain korkeita sateen todennäköisyyksiä sekä sademääriä, mutta ei suoria merkkejä myrskyistä tai hälyttävistä vaaratilanteista. Ukkoskoodit eivät esiinny ennusteessa. Merenkulun osalta aallonkorkeudet ovat matalia (alle metri). Kokonaisriskitaso on kohtalainen sateisuuden ja siihen liittyvien tekijöiden vuoksi.",
   "hazards": {
-    "thunder": null,
+    "thunder": "normal",
     "rain": "moderate",
-    "flood": null,
-    "landslide": null,
-    "sea": null
-  }
+    "flood": "normal",
+    "landslide": "normal",
+    "sea": "normal"
+  },
+  "hazard_details": {
+    "thunder": "Sääkoodit eivät sisällä arvoja 95, 96 tai 99, joten ukkosriski on normaali.",
+    "rain": "Ennusteessa esiintyy toistuvia sateita ja ajoittain merkittävämpiä sademääriä (esim. Phuketissa ja Phi Phillä useina tunteina yli 2–4 mm/h ja korkeita satamaprosentteja), mikä nostaa saderiskin kohtalaiseksi.",
+    "flood": "Pelkkien sadehavaintojen perusteella ei voi päätellä tulvariskiä sääntöjen mukaisesti, joten tulvariski on normaali.",
+    "landslide": "Pelkkien sadehavaintojen perusteella ei voi päätellä maanvyörymää, joten riski on normaali.",
+    "sea": "Aallonkorkeudet pysyvät matalina (pääasiassa alle 0,6 metriä) sekä Phuketissa että Phi Phillä, joten meririski on normaali."
+  },
+  "sources": [
+    {
+      "name": "Open-Meteo weather – phuket",
+      "url": "https://open-meteo.com/en/docs",
+      "status": "success",
+      "retrieved_at": "2026-11-12T02:33:10.673637+00:00",
+      "used_in_analysis": true
+    },
+    {
+      "name": "Open-Meteo marine – phuket",
+      "url": "https://open-meteo.com/en/docs/marine-weather-api",
+      "status": "success",
+      "retrieved_at": "2026-11-12T02:33:10.673637+00:00",
+      "used_in_analysis": true
+    },
+    {
+      "name": "Open-Meteo weather – phi_phi",
+      "url": "https://open-meteo.com/en/docs",
+      "status": "success",
+      "retrieved_at": "2026-11-12T02:33:10.673637+00:00",
+      "used_in_analysis": true
+    },
+    {
+      "name": "Open-Meteo marine – phi_phi",
+      "url": "https://open-meteo.com/en/docs/marine-weather-api",
+      "status": "success",
+      "retrieved_at": "2026-11-12T02:33:10.673637+00:00",
+      "used_in_analysis": true
+    },
+    {
+      "name": "TMD Phuket – verkkosivun teksti",
+      "url": "https://phuketmet.tmd.go.th/th",
+      "status": "success",
+      "retrieved_at": "2026-11-12T02:33:10.673637+00:00",
+      "used_in_analysis": true,
+      "note": "Julkaisuaikaa ei varmistettu"
+    }
+  ]
 }
