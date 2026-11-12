@@ -223,20 +223,39 @@ Säätiedot:
         "v1beta/models/gemini-3.5-flash-lite:generateContent"
     )
 
-    response = requests.post(
-        url,
-        headers={"x-goog-api-key": API_KEY},
-        json={
-            "contents": [
-                {"parts": [{"text": prompt}]}
-            ],
-            "generationConfig": {
-                "responseMimeType": "application/json",
-                "temperature": 0.1,
-            },
-        },
-        timeout=120,
-    )
+    import time
+
+    for attempt in range(4):
+        try:
+            response = requests.post(
+                url,
+                headers={"x-goog-api-key": API_KEY},
+                json={
+                    "contents": [
+                        {"parts": [{"text": prompt}]}
+                    ],
+                    "generationConfig": {
+                        "responseMimeType": "application/json",
+                        "temperature": 0.1,
+                    },
+                },
+                timeout=120,
+            )
+        except requests.exceptions.Timeout:
+            if attempt == 3:
+                raise
+            time.sleep(15 * (2 ** attempt))
+            continue
+
+        if response.status_code in (429, 500, 502, 503, 504):
+            if attempt < 3:
+                wait = 15 * (2 ** attempt)
+                print(f"Gemini {response.status_code}, odotetaan {wait}s")
+                time.sleep(wait)
+                continue
+
+        break
+
 
     if not response.ok:
         print("Gemini API:", response.status_code, response.text[:1500])
