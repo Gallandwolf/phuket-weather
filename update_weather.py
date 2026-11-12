@@ -94,6 +94,8 @@ Säätiedot:
         },
         timeout=90,
     )
+    
+    print("Gemini API:", response.status_code, response.text[:1500])
     response.raise_for_status()
     result = response.json()
     answer = result["candidates"][0]["content"]["parts"][0]["text"]
