@@ -50,6 +50,14 @@ h1 {
   padding: 30px;
 }
 
+.hero-top { display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 20px; align-items: start; }
+.hero-copy { min-width: 0; }
+.weather-display { text-align: center; align-self: start; justify-self: end; width: 150px; }
+.weather-display svg { width: 118px; height: 118px; display: block; margin: 0 auto; }
+.weather-temp { font-size: 31px; font-weight: 800; line-height: 1.2; white-space: nowrap; }
+.weather-caption { font-size: 13px; color: #e4ecf7; margin-top: 3px; }
+
+
 .hero[data-level="1"] {
   background: #104537;
   border-color: #4ce0a3;
@@ -266,6 +274,12 @@ button:hover {
   .grid { grid-template-columns: 1fr; }
   .risks { grid-template-columns: repeat(3, 1fr); }
   .hero { padding: 22px 18px; }
+  .hero-top { grid-template-columns: minmax(0, 1fr) 94px; gap: 8px; }
+  .weather-display { width: 94px; }
+  .weather-display svg { width: 84px; height: 84px; }
+  .weather-temp { font-size: 23px; }
+  .weather-caption { font-size: 11px; }
+  .status h2 { overflow-wrap: anywhere; }
   .status .symbol { font-size: 40px; }
   .card { padding: 17px; }
 }
@@ -286,6 +300,8 @@ button:hover {
 </header>
 
 <section class="hero" id="hero" data-level="0">
+  <div class="hero-top">
+  <div class="hero-copy">
   <div class="eyebrow">TÄMÄNHETKINEN TILANNE</div>
 
   <div class="status">
@@ -299,6 +315,14 @@ button:hover {
 
   <div class="detail" id="detail">
     Odotetaan sääagentin tietoja.
+  </div>
+
+  </div>
+  <div class="weather-display" aria-live="polite">
+    <div id="weatherIcon" aria-hidden="true"></div>
+    <div class="weather-temp" id="weatherTemp">— °C</div>
+    <div class="weather-caption" id="weatherCaption">Säätieto puuttuu</div>
+  </div>
   </div>
 
   <div class="chips">
@@ -552,6 +576,39 @@ function renderSources(data) {
   }
 }
 
+// Nykyinen säätila perustuu Phuketin Open-Meteo WMO-sääkoodiin.
+function renderCurrentWeather(phuket) {
+  const code = Number(phuket?.weather_code);
+  const hasCode = phuket?.weather_code !== null && phuket?.weather_code !== undefined && Number.isFinite(code);
+  const temp = phuket?.temperature;
+  $("weatherTemp").textContent = temp === null || temp === undefined || !Number.isFinite(Number(temp))
+    ? "— °C" : Math.round(Number(temp)) + " °C";
+
+  let kind = "unknown", caption = "Säätieto puuttuu";
+  if (hasCode) {
+    if ([95, 96, 99].includes(code)) { kind = "storm"; caption = "Ukkosta"; }
+    else if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82].includes(code)) { kind = "rain"; caption = "Sadetta"; }
+    else if ([71, 73, 75, 77, 85, 86].includes(code)) { kind = "snow"; caption = "Lumisadetta"; }
+    else if (code === 0) { kind = "sun"; caption = "Selkeää"; }
+    else if ([1, 2].includes(code)) { kind = "partly"; caption = "Puolipilvistä"; }
+    else if (code === 3) { kind = "cloud"; caption = "Pilvistä"; }
+    else if ([45, 48].includes(code)) { kind = "cloud"; caption = "Sumuista"; }
+  }
+  const rays = Array.from({length: 8}, (_, i) =>
+    `<line x1="37" y1="12" x2="37" y2="4" transform="rotate(${i * 45} 37 37)"/>`).join("");
+  const sun = `<g stroke="#FFCB45" stroke-width="5" stroke-linecap="round">${rays}</g><circle cx="37" cy="37" r="20" fill="#FFCB45"/>`;
+  const cloud = `<path d="M25 70 C11 70 10 48 25 43 C27 24 53 21 62 38 C80 33 93 48 86 62 C84 68 78 70 70 70 Z" fill="${kind === 'storm' ? '#8B99AF' : '#D4E1EE'}" stroke="#A9BCD0" stroke-width="2"/>`;
+  const rain = `<g stroke="#51BDF7" stroke-width="5" stroke-linecap="round"><line x1="32" y1="77" x2="26" y2="91"/><line x1="54" y1="77" x2="48" y2="91"/><line x1="76" y1="77" x2="70" y2="91"/></g>`;
+  const lightning = `<path d="M57 64 L39 85 L52 84 L45 99 L76 73 L59 75 L68 64 Z" fill="#FFD329" stroke="#FFF0A3" stroke-width="2" stroke-linejoin="round"/>`;
+  const snow = `<g fill="#D7F4FF"><circle cx="30" cy="83" r="4"/><circle cx="51" cy="89" r="4"/><circle cx="73" cy="83" r="4"/></g>`;
+  const artwork = kind === "unknown" ? `<text x="50" y="62" text-anchor="middle" font-size="46" fill="#E4ECF7">?</text>`
+    : (kind === "sun" || kind === "partly" ? sun : "")
+      + (kind !== "sun" ? cloud : "")
+      + (kind === "rain" ? rain : kind === "storm" ? lightning : kind === "snow" ? snow : "");
+  $("weatherIcon").innerHTML = `<svg viewBox="0 0 100 100" role="img" aria-label="${caption}">${artwork}</svg>`;
+  $("weatherCaption").textContent = caption;
+}
+
 function render(data) {
   if (!data || typeof data !== "object" || Array.isArray(data)) {
     throw new Error("Virheellinen JSON-tiedosto");
@@ -581,6 +638,7 @@ function render(data) {
   $("source").textContent = "JSON-syöte · vastaanotettu";
 
   const phuket = data.phuket;
+  renderCurrentWeather(phuket);
 
   $("phuketLevel").textContent =
     phuket && typeof phuket === "object"
@@ -693,6 +751,7 @@ async function refresh() {
     $("phiWeather").textContent =
       "Lämpötila — · Aallot — · Tuuli —";
 
+    renderCurrentWeather(null);
     resetHazards();
     $("hazardDetails").textContent = "Tietojen haku epäonnistui.";
     $("sourcesList").textContent = "Tietojen haku epäonnistui.";
