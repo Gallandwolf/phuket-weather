@@ -617,7 +617,19 @@ function render(data) {
   // Null tarkoittaa tuntematonta riskitasoa.
   // Varoitusten puuttuminen ei tarkoita normaalia tilannetta.
 
-  const overallLevel = level(data.severity);
+  // Ensisijaisesti koko alueen riskitaso. Jos se puuttuu,
+  // käytetään vain JSONissa nimenomaisesti ilmoitettuja riskitasoja.
+  // Tuntemattomia (null) vaaroja ei tulkita turvallisiksi.
+  const explicitOverall = level(data.severity);
+  const fallbackLevels = [
+    level(data.phuket?.severity),
+    level(data.phi_phi?.severity),
+    ...["thunder", "rain", "flood", "landslide", "sea"].map(key => {
+      const value = data.hazards?.[key];
+      return level(value && typeof value === "object" ? value.severity : value);
+    })
+  ];
+  const overallLevel = explicitOverall || Math.max(0, ...fallbackLevels);
 
   $("hero").dataset.level = String(overallLevel);
   $("symbol").textContent = icons[overallLevel];
