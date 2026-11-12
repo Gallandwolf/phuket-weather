@@ -239,6 +239,22 @@ button:hover {
   font-size: 13px;
 }
 
+
+.risk-details, .sources-panel {
+  background: #16253a;
+  border: 1px solid #334760;
+  border-radius: 20px;
+  padding: 22px;
+  margin-top: 18px;
+}
+.risk-details h3, .sources-panel h3 { margin: 0 0 12px; }
+.risk-detail { padding: 10px 0; border-top: 1px solid #334760; line-height: 1.5; }
+.risk-detail strong { display: block; margin-bottom: 4px; }
+.risk-detail p { margin: 0; color: #c3d2e4; overflow-wrap: anywhere; }
+.source-entry { padding: 12px 0; border-top: 1px solid #334760; line-height: 1.6; }
+.source-entry a { color: #85e2ed; overflow-wrap: anywhere; }
+.source-meta { color: #b8c8dc; font-size: 13px; }
+
 .footer {
   margin-top: 25px;
   color: #9fb2c8;
@@ -351,6 +367,24 @@ button:hover {
 
 </div>
 
+<section class="risk-details" aria-labelledby="risk-details-title">
+  <h3 id="risk-details-title">🔎 Riskien perustelut</h3>
+  <div id="hazardDetails">Odotetaan analyysin tietoja.</div>
+</section>
+
+<section class="sources-panel" aria-labelledby="sources-title">
+  <h3 id="sources-title">📚 Tietolähteet ja analyysin perusteet</h3>
+  <p class="message">Näytetään vain tiedostoon kirjatut lähteet. Onnistunut haku ei yksin takaa tiedotteen ajantasaisuutta.</p>
+  <div id="sourcesList">Odotetaan lähdetietoja.</div>
+  <h4 style="margin: 20px 0 8px;">🔗 Avaa alkuperäiset sääpalvelut</h4>
+  <p class="message">Alla olevat linkit avautuvat suoraan alkuperäisille sivuille. Linkki ei tarkoita, että sääagentti olisi analysoinut kyseisen sivun tai sen tutkakuvan.</p>
+  <div class="source-entry"><a href="https://phuketmet.tmd.go.th/th" target="_blank" rel="noopener noreferrer">TMD Phuket – paikalliset säätiedot ja tiedotteet ↗</a></div>
+  <div class="source-entry"><a href="https://weather.tmd.go.th/pkt240_HQ_edit2.php" target="_blank" rel="noopener noreferrer">TMD – Phuketin säätutka ↗</a></div>
+  <div class="source-entry"><a href="https://www.tmd.go.th/en" target="_blank" rel="noopener noreferrer">Thai Meteorological Department – valtakunnallinen sääpalvelu ↗</a></div>
+  <div class="source-entry"><a href="https://open-meteo.com/en/docs" target="_blank" rel="noopener noreferrer">Open-Meteo – sääennusteiden tietolähde ↗</a></div>
+  <div class="source-entry"><a href="https://open-meteo.com/en/docs/marine-weather-api" target="_blank" rel="noopener noreferrer">Open-Meteo Marine – merisää ja aallokko ↗</a></div>
+</section>
+
 <section class="action">
   <h3>🛡 Toimintaohje</h3>
   <p id="advice">
@@ -373,7 +407,7 @@ button:hover {
 </details>
 
 <div class="footer">
-  Tietolähde: Make.com / Open-Meteo / Gemini.
+  Tietojen keruu: GitHub Actions / Open-Meteo / Gemini. Lähteet eritellään yllä.
   Sivu ei ole virallinen säävaroituspalvelu.
   Harmaa tarkoittaa, ettei riskitasoa voida vahvistaa.
   Varoitusten puuttuminen ei tarkoita turvallista säätä.
@@ -452,6 +486,70 @@ function resetHazards() {
     .forEach(id => setHazard(id, 0));
 }
 
+const hazardNames = {
+  thunder: "Ukkonen",
+  rain: "Rankkasade",
+  flood: "Tulva",
+  landslide: "Maanvyörymä",
+  sea: "Meriolosuhteet"
+};
+
+function displayTime(value) {
+  if (!value) return "Aika ei tiedossa";
+  const date = new Date(value);
+  return Number.isNaN(date.getTime())
+    ? "Aika ei tiedossa"
+    : date.toLocaleString("fi-FI", { timeZone: "Asia/Bangkok" }) + " (Thaimaan aika)";
+}
+
+function renderDetails(data) {
+  const container = $("hazardDetails");
+  container.replaceChildren();
+  const details = data.hazard_details || {};
+  for (const [key, name] of Object.entries(hazardNames)) {
+    const item = document.createElement("div");
+    item.className = "risk-detail";
+    const heading = document.createElement("strong");
+    heading.textContent = name + " – " + labels[level(data.hazards?.[key])];
+    const description = document.createElement("p");
+    description.textContent = safeText(details[key], "Perustelua ei saatavilla.");
+    item.append(heading, description);
+    container.appendChild(item);
+  }
+}
+
+function renderSources(data) {
+  const container = $("sourcesList");
+  container.replaceChildren();
+  const sources = Array.isArray(data.sources) ? data.sources : [];
+  if (!sources.length) {
+    container.textContent = "Lähdetietoja ei ole saatavilla.";
+    return;
+  }
+  for (const source of sources) {
+    const item = document.createElement("div");
+    item.className = "source-entry";
+    const name = document.createElement("strong");
+    name.textContent = safeText(source.name, "Nimetön lähde");
+    const meta = document.createElement("div");
+    meta.className = "source-meta";
+    const used = source.status === "success" && source.used_in_analysis === true;
+    meta.textContent = (used ? "Haettu ja mukana analyysissä" : "Ei käytetty analyysissä")
+      + " · Haku: " + displayTime(source.retrieved_at)
+      + (source.note ? " · " + source.note : "");
+    item.append(name, meta);
+    if (typeof source.url === "string" && /^https:\/\//i.test(source.url)) {
+      const link = document.createElement("a");
+      link.href = source.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "Avaa lähde";
+      item.appendChild(link);
+    }
+    container.appendChild(item);
+  }
+}
+
 function render(data) {
   if (!data || typeof data !== "object" || Array.isArray(data)) {
     throw new Error("Virheellinen JSON-tiedosto");
@@ -528,6 +626,9 @@ function render(data) {
       });
   }
 
+  renderDetails(data);
+  renderSources(data);
+
   const precautions = data.precautions;
 
   if (Array.isArray(precautions) && precautions.length) {
@@ -591,6 +692,8 @@ async function refresh() {
       "Lämpötila — · Aallot — · Tuuli —";
 
     resetHazards();
+    $("hazardDetails").textContent = "Tietojen haku epäonnistui.";
+    $("sourcesList").textContent = "Tietojen haku epäonnistui.";
 
     $("message").textContent =
       "Virhe: " + error.message;
@@ -602,7 +705,7 @@ $("refresh").addEventListener("click", refresh);
 refresh();
 
 // Sivu tarkistaa GitHubin tiedot 5 minuutin välein.
-// Make.comin oma ajastus toimii erikseen.
+// GitHub Actions päivittää weather.json-tiedostoa tunnin välein.
 
 setInterval(refresh, 5 * 60 * 1000);
 </script>
