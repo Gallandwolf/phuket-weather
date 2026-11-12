@@ -73,10 +73,10 @@ Säätiedot:
 """ + json.dumps(weather, ensure_ascii=False)
 
   
+  
     url = (
-       
+        "https://generativelanguage.googleapis.com/"
         "v1beta/models/gemini-3.5-flash-lite:generateContent"
-
     )
 
     
