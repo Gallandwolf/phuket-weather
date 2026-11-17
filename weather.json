@@ -1,8 +1,8 @@
 {
   "location": "Phuket ja Phi Phi",
-  "updated_at": "2026-11-17T14:19:10.800204+00:00",
+  "updated_at": "2026-11-17T17:00:01.302873+00:00",
   "hazard_type": null,
-  "severity": null,
+  "severity": "moderate",
   "expected_timing": null,
   "precautions": null,
   "source_links": [
@@ -15,18 +15,18 @@
   ],
   "fingerprint": "phuket-weather-hourly",
   "phuket": {
-    "temperature": 28.3,
-    "weather_code": 51,
-    "rain": 0.1,
-    "wind": 1.9,
-    "severity": null
+    "temperature": 28.1,
+    "weather_code": 3,
+    "rain": 0.0,
+    "wind": 5.6,
+    "severity": "moderate"
   },
   "phi_phi": {
-    "temperature": 29.7,
-    "rain": 0.0,
-    "wind": 2.4
+    "temperature": 29.2,
+    "rain": 0.2,
+    "wind": 17.5
   },
-  "summary": "Phuketin ja Phi Phin alueella sääennusteissa esiintyy ajoittaista sadetta ja yksittäisiä sääkoodin 95 mukaisia ukkoshavaintoja (Phuketissa), mutta virallisia voimassa olevia säävaroituksia ei ole käytettävissä. TMD:n sivuilla tiedot olivat latautumassa eikä niitä voitu vahvistaa ajantasaisiksi. DMR:n sivujen staattinen HTML-sisältö ei todista maanvyörymäriskiä normaaliksi eikä sisällä ajantasaista, yksiselitteisesti Phuketiin tai Phi Phiin kohdistuvaa varoitustietoa. Puuttuvan paikallisen ja ajantasaisen näytön vuoksi tulva- ja maanvyörymäriskien arvoksi asetetaan null.",
+  "summary": "Phuketin ja Phi Phin alueella säässä esiintyy ajoittaista sadetta ja ajoittaisia satekuuroja. Ukkosriski on olemassa alkujakson sääkoodien (95) perusteella. Merellä aallonkorkeudet pysyvät pääosin matalina (alle metrissä), mutta puuskat voivat ajoittain nostaa tuulivaikutusta. Tulva- ja maanvyörymäriskeille ei ole riittävää ajantasaista, paikallista näyttöä DMR- ja TMD-tietojen rajoitusten vuoksi, joten niiden riskitasoksi on asetettu null.",
   "hazards": {
     "thunder": "moderate",
     "rain": "moderate",
@@ -35,46 +35,46 @@
     "sea": "low"
   },
   "hazard_details": {
-    "thunder": "Phuketin säädatassa on havaittu weather_code 95 (ukkonen), mikä nostaa ukkosriskiä kyseisellä alueella. Phi Phin osalta ei ole vastaavia ukkoskoodeja, mutta avoimen ennusteen epävarmuuden vuoksi tilannetta seurataan.",
-    "rain": "Ennusteissa on luvattu ajoittaista sadetta ja sadekuuroja sekä Phuketiin että Phi Phiin. Sademäärät ja -todennäköisyydet vaihtelevat tunneittain, minkä vuoksi saderiski on kohtalainen.",
-    "flood": "Tulvariskille ei ole riittävästi ajantasaista, paikallista näyttöä tai virallista varoitustietoa. Vaikka ennusteissa on sadekuuroja, pelkän yksittäisen sadehavainnon perusteella ei voi päätellä tulvariskiä, joten arvona käytetään null.",
-    "landslide": "DMR:n sivujen haettu HTML-teksti latautuu eikä sisällä ajantasaisia, Phuketiin tai Phi Phiin yksiselitteisesti sidottuja varoitustietoja. Sivun onnistunut lataus ei todista maanvyörymäriskin olevan normaali, ja koska ajantasaista näyttöä ei ole, arvona on käytettävä null.",
-    "sea": "Phuketin ja Phi Phin meriennusteiden aallonkorkeudet pysyvät pääosin matalina (alle metrissä, enimmäkseen noin 0.4–0.9 metriä) ja tuuliolosuhteet ovat maltilliset, joten meririski on matala."
+    "thunder": "Phuketin säädatassa on havaittu WMO-sääkoodi 95, joka merkitsee ukkosta. Myöhemmissä ennusteissa ukkosriski laskee, mutta tilannetta on seurattava.",
+    "rain": "Ennusteissa on luvattu ajoittaista sadetta ja satekuuroja (mm. koodit 51, 53 ja 80 sekä mitatut sademäärät), joiden todennäköisyys vaihtelee.",
+    "flood": "Tulvariskille ei ole riittävää ajantasaista ja paikallista näyttöä annetuissa tiedoissa. Pelkkien sadehavaintojen perusteella ei voi päätellä tulvaa, joten arvo on null.",
+    "landslide": "DMR:n verkkosivutekstin julkaisuajankohtaa tai ajantasaisuutta ei ole vahvistettu, ja sivu voi ladata tiedot dynaamisesti. Koska ajantasaista ja yksiseliketoimista paikallista näyttöä ei ole, riskitasona käytetään null-arvoa sääntöjen mukaisesti.",
+    "sea": "Phuketin ja Phi Phin meriennusteiden mukaan aallonkorkeus pysyy maltillisella tasolla (enimmäkseen noin 0.4–0.9 metriä), mutta tuuli- ja puuskatiedot edellyttävät pientä varovaisuutta merenkulussa."
   },
   "sources": [
     {
       "name": "Open-Meteo weather – phuket",
       "url": "https://open-meteo.com/en/docs",
       "status": "success",
-      "retrieved_at": "2026-11-17T14:18:43.019597+00:00",
+      "retrieved_at": "2026-11-17T16:57:26.918343+00:00",
       "used_in_analysis": true
     },
     {
       "name": "Open-Meteo marine – phuket",
       "url": "https://open-meteo.com/en/docs/marine-weather-api",
       "status": "success",
-      "retrieved_at": "2026-11-17T14:18:43.413369+00:00",
+      "retrieved_at": "2026-11-17T16:57:27.421196+00:00",
       "used_in_analysis": true
     },
     {
       "name": "Open-Meteo weather – phi_phi",
       "url": "https://open-meteo.com/en/docs",
       "status": "success",
-      "retrieved_at": "2026-11-17T14:18:43.617085+00:00",
+      "retrieved_at": "2026-11-17T16:57:27.604237+00:00",
       "used_in_analysis": true
     },
     {
       "name": "Open-Meteo marine – phi_phi",
       "url": "https://open-meteo.com/en/docs/marine-weather-api",
       "status": "success",
-      "retrieved_at": "2026-11-17T14:18:43.995233+00:00",
+      "retrieved_at": "2026-11-17T16:57:28.075795+00:00",
       "used_in_analysis": true
     },
     {
       "name": "TMD Phuket – verkkosivun teksti",
       "url": "https://phuketmet.tmd.go.th/th",
       "status": "success",
-      "retrieved_at": "2026-11-17T14:18:45.312153+00:00",
+      "retrieved_at": "2026-11-17T16:57:29.275482+00:00",
       "used_in_analysis": true,
       "note": "Julkaisuaikaa ja varoitusten ajantasaisuutta ei varmistettu"
     },
@@ -82,7 +82,7 @@
       "name": "DMR – maanvyörymäseurannan verkkosivun teksti",
       "url": "https://landslidemonitoring.dmr.go.th/Home/Index",
       "status": "success",
-      "retrieved_at": "2026-11-17T14:18:46.578003+00:00",
+      "retrieved_at": "2026-11-17T16:57:30.447290+00:00",
       "used_in_analysis": true,
       "note": "Sivun teksti haettu; ajantasaisia mittauksia tai varoituksia ei ole vahvistettu"
     }
