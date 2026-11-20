@@ -1,8 +1,8 @@
 {
   "location": "Phuket ja Phi Phi",
-  "updated_at": "2026-11-19T22:45:24.931848+00:00",
+  "updated_at": "2026-11-20T00:56:37.538083+00:00",
   "hazard_type": null,
-  "severity": "moderate",
+  "severity": "low",
   "expected_timing": null,
   "precautions": null,
   "source_links": [
@@ -15,66 +15,66 @@
   ],
   "fingerprint": "phuket-weather-hourly",
   "phuket": {
-    "temperature": 26.8,
+    "temperature": 27.6,
     "weather_code": 3,
     "rain": 0.0,
-    "wind": 22.3,
-    "severity": "moderate"
+    "wind": 20.0,
+    "severity": "low"
   },
   "phi_phi": {
-    "temperature": 26.6,
+    "temperature": 27.0,
     "rain": 0.0,
-    "wind": 28.0
+    "wind": 24.0
   },
-  "summary": "Phuketin ja Phi Phin sääennusteessa on havaittavissa ajoittaista sateisuutta sekä ukkosen riski (weather_code 95), ja tuulenpuuskat yltävät paikoin yli 60 km/h. Viralliset TMD-säätiedot eivät latautuneet ja DMR-maanvyörymyksen seurantatiedoissa ei ole ajantasaista kohdekohtaista vahvistusta, joten tulva- ja maanvyörymäriskeille on annettu arvo null puuttuvan paikallisen näytön vuoksi.",
+  "summary": "Phuketin ja Phi Phin sääennusteet osoittavat enimmäkseen kevyitä sateita (sadekoodit 51 ja 53) ja kohtalaisia tuulia. Open-Meteon ennuste ei ole virallinen varoitus. TMD:n ja DMR:n sivuilla ei ole ladattavissa ajantasaisia virallisia varoituksia, eikä DMR:n sivun latautuminen todista maanvyörymäriskiä normaaliksi ilman ajantasaista paikallista näyttöä.",
   "hazards": {
-    "thunder": "moderate",
-    "rain": "moderate",
+    "thunder": "low",
+    "rain": "low",
     "flood": null,
     "landslide": null,
-    "sea": "moderate"
+    "sea": "low"
   },
   "hazard_details": {
-    "thunder": "Phuketin sääennusteen tuntilukemissa on havaittu weather_code 95 (ukkonen) 20.11.2026 klo 18:00, mikä nostaa ukkosriskin kohtalaiseksi.",
-    "rain": "Ennusteessa esiintyy ajoittain sademääriä ja sateen todennäköisyyksiä (mm. Phuketin iltalylyissä ja Phi Phillyä kohti mentäessä), mutta kyseessä ei ole poikkeuksellinen suurtulvaan johtava sademäärä.",
-    "flood": "Tulvariskille ei ole riittävästi ajantasaista, paikallista näyttöä annetuissa tiedoissa. TMD:n sivut eivät latautuneet, joten arvo on null eikä sitä voi päätellä pelkistä sadehavainnoista.",
-    "landslide": "DMR-sivun teksteissä ei ole yksiselitteistä, aluekohtaista ja ajantasaista varoitusta Phuketin tai Phi Phin alueelle, ja sivun lataus tapahtuu osin dynaamisesti. Koska ajantasaista paikallista näyttöä ei ole vahvistettu, riskitasona käytetään null eikä tilannetta voi päätellä normaaliksi.",
-    "sea": "Phuketin ja Phi Phin meriennusteen mukaan aallonkorkeudet vaihtelevat noin 0,5 ja 0,9 metrin välillä ja tuulenpuuskat kohoavat paikoin yli 50–60 km/h, mikä luo merialueelle kohtalaisen riskin."
+    "thunder": "Weather_code-arvoissa ei esiinny lukuja 95, 96 tai 99, jotka viittaisivat ukkoseen. Ukkosriski on matala / ei havaittu.",
+    "rain": "Ennustetut sademäärät ovat pieniä (tuntisateet enimmäkseen alle 1 mm, koodit 51 ja 53), joten saderiski on matala.",
+    "flood": "Tulvariskille ei ole riittävästi ajantasaista, paikallista näyttöä annetuissa tiedoissa, joten tulvan arvona käytetään null.",
+    "landslide": "DMR-sivun teksti ei sisällä ajantasaisia, Phuketiin tai Phi Phi -saareen yksiselisesti kohdistuvia varoituksia. Sivun latautuminen ei todista riskiä normaaliksi, ja koska ajantasaista paikallista näyttöä ei ole, maanvyörymän arvona käytetään null.",
+    "sea": "Phuketin ja Phi Phin meriennusteet osoittavat aallonkorkeuksien pysyttelevän noin 0.5–0.9 metrissä ja tuulenpuuskat ovat alle 63 km/h, joten meririski on matala."
   },
   "sources": [
     {
       "name": "Open-Meteo weather – phuket",
       "url": "https://open-meteo.com/en/docs",
       "status": "success",
-      "retrieved_at": "2026-11-19T22:45:19.359948+00:00",
+      "retrieved_at": "2026-11-20T00:56:15.647271+00:00",
       "used_in_analysis": true
     },
     {
       "name": "Open-Meteo marine – phuket",
       "url": "https://open-meteo.com/en/docs/marine-weather-api",
       "status": "success",
-      "retrieved_at": "2026-11-19T22:45:19.767886+00:00",
+      "retrieved_at": "2026-11-20T00:56:16.032963+00:00",
       "used_in_analysis": true
     },
     {
       "name": "Open-Meteo weather – phi_phi",
       "url": "https://open-meteo.com/en/docs",
       "status": "success",
-      "retrieved_at": "2026-11-19T22:45:19.960883+00:00",
+      "retrieved_at": "2026-11-20T00:56:16.118254+00:00",
       "used_in_analysis": true
     },
     {
       "name": "Open-Meteo marine – phi_phi",
       "url": "https://open-meteo.com/en/docs/marine-weather-api",
       "status": "success",
-      "retrieved_at": "2026-11-19T22:45:20.343247+00:00",
+      "retrieved_at": "2026-11-20T00:56:16.493517+00:00",
       "used_in_analysis": true
     },
     {
       "name": "TMD Phuket – verkkosivun teksti",
       "url": "https://phuketmet.tmd.go.th/th",
       "status": "success",
-      "retrieved_at": "2026-11-19T22:45:21.236871+00:00",
+      "retrieved_at": "2026-11-20T00:56:18.295126+00:00",
       "used_in_analysis": true,
       "note": "Julkaisuaikaa ja varoitusten ajantasaisuutta ei varmistettu"
     },
@@ -82,7 +82,7 @@
       "name": "DMR – maanvyörymäseurannan verkkosivun teksti",
       "url": "https://landslidemonitoring.dmr.go.th/Home/Index",
       "status": "success",
-      "retrieved_at": "2026-11-19T22:45:22.484853+00:00",
+      "retrieved_at": "2026-11-20T00:56:19.588794+00:00",
       "used_in_analysis": true,
       "note": "Sivun teksti haettu; ajantasaisia mittauksia tai varoituksia ei ole vahvistettu"
     }
