@@ -1,8 +1,8 @@
 {
   "location": "Phuket ja Phi Phi",
-  "updated_at": "2026-11-25T07:11:15.702959+00:00",
+  "updated_at": "2026-11-25T09:00:23.858305+00:00",
   "hazard_type": null,
-  "severity": "moderate",
+  "severity": "low",
   "expected_timing": null,
   "precautions": null,
   "source_links": [
@@ -15,66 +15,66 @@
   ],
   "fingerprint": "phuket-weather-hourly",
   "phuket": {
-    "temperature": 30.7,
+    "temperature": 30.2,
     "weather_code": 3,
     "rain": 0.0,
-    "wind": 9.3,
-    "severity": "moderate"
+    "wind": 5.4,
+    "severity": "low"
   },
   "phi_phi": {
-    "temperature": 28.3,
+    "temperature": 28.1,
     "rain": 0.0,
-    "wind": 2.3
+    "wind": 7.2
   },
-  "summary": "Phuketin ja Phi Phin alueella on havaittavissa kohtalaista saderiskiä ja ajoittaisia säävaihteluita ennustettujen sademäärien ja WMO-sääkoodien perusteella. Ukkosen riski on matala, sillä sääkoodit eivät osoita ukkosta (koodit 95, 96, 99 puuttuvat). Meriolosuhteet ovat rauhalliset, eikä aallonkorkeudessa tai tuulessa ole havaittavasti riskejä. Tulva- ja maanvyörymäriskeille ei ole riittävää ajantasaista ja paikallista näyttöä, minkä vuoksi niiden arvona käytetään null-tasoa.",
+  "summary": "Phuketin ja Phi Phin sääennusteen mukaan alueella on odotettavissa ajoittaista pientä sadetta ja pilvisyyttä, mutta säätila on kokonaisuutena melko rauhallinen. Ukkosriski on matala, sillä sääkoodeissa ei esiinny ukkosta merkitseviä arvoja (95, 96, 99). Merenkäynti on hyvin rauhallista, sillä aallonkorkeudet pysyvät matalina. Tulva- ja maanvyörymäriskeille ei ole käytettävissä ajantasaista, paikallista virallista näyttöä tai toimivia mittaustietoja, joten niiden riskeiksi on määritelty null.",
   "hazards": {
     "thunder": "low",
-    "rain": "moderate",
+    "rain": "low",
     "flood": null,
     "landslide": null,
     "sea": "low"
   },
   "hazard_details": {
-    "thunder": "Open-Meteon sääennusteen weather_code-arvot eivät sisällä ukkoseen viittaavia koodeja (95, 96, 99), joten ukkosriski on matala.",
-    "rain": "Ennustetut sademäärät ja tuntikohtaiset sadekertymät (esim. iltavuorokausina kohoavat sademäärät ja sateiset säätilat) nostavat saderiskin kohtalaiselle tasolle.",
-    "flood": "Tulvariskille ei ole riittävää ajantasaista ja paikallista näyttöä annetuissa lähdetiedoissa, eikä pelkistä sadehavainnoista voi suoraan päätellä tulvaa, joten arvo on null.",
-    "landslide": "DMR-lähteen tekstissä ei ole yksiselitteisesti Phuketille tai Phi Phille kohdistettuja, ajankohtaisia varoituksia, ja sivun lataus tapahtuu staattisen tekstin kautta ilman todistettua reaaliaikaista mittausdataa kyseisille alueille. Koska paikallista näyttöä maanvyörymäriskistä ei ole, arvo on null eikä sitä voi päätellä normaaliksi.",
-    "sea": "Phuketin ja Phi Phin merisäätietojen mukaan aallonkorkeudet ovat matalia (enimmäkseen noin 0.3 metriä tai sen alle) ja meriolosuhteet ovat rauhalliset, joten meririski on matala."
+    "thunder": "Open-Meteon sääennusteen weather_code-arvot Phuketissa ja Phi Phillä ovat enimmäkseen koodia 3 (pilvistä) tai 51/53 (heikkoa sadetta). Ukkosesta kertovia koodeja (95, 96, 99) ei havaita, joten ukkosriski on matala.",
+    "rain": "Ennustetut sademäärät ja tuntikohtaiset sadekertymät Phuketissa ja Phi Phillä ovat pieniä (enimmäkseen alle 1 mm tunneissa), vaikka sateen todennäköisyys kasvaa ajoittain. Saderiski on matala.",
+    "flood": "Tulvariskille ei ole riittävää ajantasaista, paikallista näyttöä tai virallista mittaustietoa annetuissa lähdetiedoissa. Pelkkä yksittäinen sadehavainto tai ennuste ei riitä tulvan arviointiin, joten arvona on käytettävä null.",
+    "landslide": "DMR:n verkkosivuteksti ei sisällä ajantasaisia, yksiselikseisesti Phuketille tai Phi Phille kohdennettuja varoituksia, eikä sivuston yleistä tekstiä tai onnistunutta latausta voida pitää todisteena normaalista tilasta. Koska riittävää ajantasaista ja paikallista näyttöä ei ole, maanvyörymäriskin arvona on null.",
+    "sea": "Phuketin ja Phi Phin merialueiden ennusteet osoittavat erittäin matalia aallonkorkeuksia (yleisesti 0.14 - 0.36 metriä) ja maltillisia tuulia. Meririski on matala."
   },
   "sources": [
     {
       "name": "Open-Meteo weather – phuket",
       "url": "https://open-meteo.com/en/docs",
       "status": "success",
-      "retrieved_at": "2026-11-25T07:11:09.324279+00:00",
+      "retrieved_at": "2026-11-25T09:00:16.595058+00:00",
       "used_in_analysis": true
     },
     {
       "name": "Open-Meteo marine – phuket",
       "url": "https://open-meteo.com/en/docs/marine-weather-api",
       "status": "success",
-      "retrieved_at": "2026-11-25T07:11:09.827402+00:00",
+      "retrieved_at": "2026-11-25T09:00:17.093816+00:00",
       "used_in_analysis": true
     },
     {
       "name": "Open-Meteo weather – phi_phi",
       "url": "https://open-meteo.com/en/docs",
       "status": "success",
-      "retrieved_at": "2026-11-25T07:11:09.979884+00:00",
+      "retrieved_at": "2026-11-25T09:00:17.251463+00:00",
       "used_in_analysis": true
     },
     {
       "name": "Open-Meteo marine – phi_phi",
       "url": "https://open-meteo.com/en/docs/marine-weather-api",
       "status": "success",
-      "retrieved_at": "2026-11-25T07:11:10.459310+00:00",
+      "retrieved_at": "2026-11-25T09:00:17.743934+00:00",
       "used_in_analysis": true
     },
     {
       "name": "TMD Phuket – verkkosivun teksti",
       "url": "https://phuketmet.tmd.go.th/th",
       "status": "success",
-      "retrieved_at": "2026-11-25T07:11:11.687451+00:00",
+      "retrieved_at": "2026-11-25T09:00:18.487376+00:00",
       "used_in_analysis": true,
       "note": "Julkaisuaikaa ja varoitusten ajantasaisuutta ei varmistettu"
     },
@@ -82,7 +82,7 @@
       "name": "DMR – maanvyörymäseurannan verkkosivun teksti",
       "url": "https://landslidemonitoring.dmr.go.th/Home/Index",
       "status": "success",
-      "retrieved_at": "2026-11-25T07:11:13.122845+00:00",
+      "retrieved_at": "2026-11-25T09:00:19.907861+00:00",
       "used_in_analysis": true,
       "note": "Sivun teksti haettu; ajantasaisia mittauksia tai varoituksia ei ole vahvistettu"
     }
